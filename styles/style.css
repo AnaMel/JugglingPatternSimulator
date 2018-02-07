@@ -48,13 +48,13 @@ h1 {
 
 .ball1 {
     left: 100px;
-    transition: all 1s;
+    transition: all 3s;
     /* transition-delay:  */
 }
 
 .ball2 {
     right: 100px;
-    transition: all 1s;
+    transition: all 3s;
     background-color: salmon;
     /* transition-delay: 1s; */
 }
