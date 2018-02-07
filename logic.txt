@@ -1,0 +1,50 @@
+Allow user to input three values.
+When the form is submitted, retrieve user selection.
+Validate that sum of the values % 3 == 0
+if true, continue to the next step. If false, show an error.
+Save input values
+Based on provided values, identify if (%2 === 0) = true, if yes - x = 0; else x = 200px; 
+Based on number, retrieve the Y offset
+
+
+if x = 0 , then change Y
+if x!=0, then change x and Y, change Y to 0 
+
+const coordinates = {
+    x-offset: [
+        {
+            number: 1,
+            height: 0
+        },
+        {
+            number: 3,
+            height: 50
+        },
+        {
+            number:5,
+            height:100
+        },
+        {
+            number: 7,
+            height: 150
+        }
+    ],
+    no-offset: [
+        {
+            number: 0,
+            height: 0
+        },
+        {
+            number: 2,
+            height:50
+        },
+        {
+            number: 4,
+            height: 100
+        },
+        {
+            number: 6,
+            height: 150
+        }
+    ]
+}

@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link href="https://fonts.googleapis.com/css?family=Abril+Fatface" rel="stylesheet">
+    <link rel="stylesheet" href="styles/style.css">
+</head>
+<body>
+    <main>
+        <h1>Juggle</h1>
+        <div class="container">
+            <div class="ball ball1"></div>
+            <div class="ball ball2"></div>
+            <div class="ball ball3"></div>
+        </div>
+        <form>
+            <input type="text" name="ball1">
+            <input type="text" name="ball2">
+            <input type="text" name="ball3">
+            <input type="submit" class="action" >
+        </form>
+        <!-- <a href="#" class="action">Juggle</a> -->
+    </main>
+
+<script src='https://code.jquery.com/jquery-3.2.1.min.js' integrity='sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4='crossorigin='anonymous'></script>
+<script>
+// input value/height data set
+const odd = [
+    {
+        number: 1,
+        height: 0
+    },
+    {
+        number: 3,
+        height: -150
+    },
+    {
+        number: 5,
+        height: -300
+    },
+    {
+        number: 7,
+        height: -450
+    }
+]
+even = [
+    {
+        number: 0,
+        height: 0
+    },
+    {
+        number: 2,
+        height: -150
+    },
+    {
+        number: 4,
+        height: -300
+    },
+    {
+        number: 6,
+        height: -450
+    }
+]
+
+
+// Actual JS
+
+    $(function(){
+        // console.log('success');
+        $('form').on('submit', function(event){
+            event.preventDefault();
+            // Extract input values
+            let ballOneYtrajectory = $('input[name=ball1]').val();
+            let ballTwoYtrajectory = $('input[name=ball2').val();
+            let ballThreeYtrajectory = $('input[name=ball3').val();
+            // Write extracted values to console
+
+            // TESTS
+            console.log(ballOneYtrajectory, ballTwoYtrajectory, ballThreeYtrajectory);
+            console.log($(window).width());
+            console.log($('.container').width());
+            let containerWidth = $('.container').width();
+            let OffsetTest = $('.ball1').offset().left;
+            let OffsetBallTwo = $('.ball2').offset().left;
+            let OffsetBallThree = $('.ball3').offset().left;
+
+
+            let middleScreen = $(window).width() * 0.5;
+
+
+
+
+
+            // Set default X coordinate to 0 for all 3 balls
+            let ballOneXtrajectory=0;
+            let ballTwoXtrajectory = 0;
+            let ballThreeXtrajectory = 0;
+
+            let ballOne = document.querySelector(".ball1");
+            let ballTwo = document.querySelector(".ball2");
+            let ballThree = document.querySelector(".ball3");
+
+// First Ball
+            // Validate whether Y coordinate is an odd number
+            if (ballOneYtrajectory % 2 == 1) {
+
+                if (OffsetTest < middleScreen) {
+                ballOneXtrajectory = $('.container').width() - 250 + "px";}
+                else if (OffsetTest >= middleScreen) { 
+                ballOneXtrajectory = -1 * ($('.container').width() - 250) + "px";
+                }
+                // Iterate through array of odd notation values and update Y trajectory with px values for the corresponding notation number
+                for (let i=0; i<odd.length;i++) {
+                    if (ballOneYtrajectory == odd[i].number) {
+                        ballOneYtrajectory= odd[i].height;
+                    }
+                }
+                console.log(ballOneYtrajectory);
+            }
+            else if (ballOneYtrajectory % 2 == 0) {
+                ballOneXtrajectory = 0;
+                for (let i = 0; i < odd.length; i++) {
+                    if (ballOneYtrajectory == even[i].number) {
+                        ballOneYtrajectory = even[i].height;
+                    }
+                }
+                console.log(ballOneYtrajectory);
+            }
+            else {
+                console.log("Such notation does not exist");
+            }
+
+            // Create array with coordinates
+            const coordinatesObject = [
+                {
+                    x: ballOneXtrajectory,
+                    y: ballOneYtrajectory
+                },
+                {
+                    x: ballOneXtrajectory,
+                    y: 0
+                }
+            ]
+
+            // Loop through array for ball1
+            for (let i=0;i<coordinatesObject.length; i++){
+                setTimeout(function timer(){
+                    let translate3dValue = "translate(" + coordinatesObject[i].x + "," + coordinatesObject[i].y + "px)";
+                    console.log(translate3dValue);
+                    ballOne.style.transform = translate3dValue;
+                }, i*750);
+            }
+
+// SECOND BALL
+            if (ballTwoYtrajectory % 2 == 1) {
+                if (OffsetBallTwo < middleScreen) {
+                    ballTwoXtrajectory = $('.container').width() - 250 + "px";
+                }
+                else if (OffsetBallTwo >= middleScreen) {
+                    ballTwoXtrajectory = -1 * ($('.container').width() - 250) + "px";
+                }
+                // Iterate through array of odd notation values and update Ytrajectory with px values for the corresponding notation number
+                for (let i = 0; i < odd.length; i++) {
+                    if (ballTwoYtrajectory == odd[i].number) {
+                        ballTwoYtrajectory = odd[i].height;
+                    }
+                }
+                console.log(ballTwoYtrajectory);
+            }
+            else if (ballTwoYtrajectory % 2 == 0) {
+                ballTwoXtrajectory = 0;
+                for (let i = 0; i < odd.length; i++) {
+                    if (ballTwoYtrajectory == even[i].number) {
+                        ballTwoYtrajectory = even[i].height;
+                    }
+                }
+                console.log(ballTwoYtrajectory);
+            }
+            else {
+                console.log("Such notation does not exist");
+            }
+
+            // Create array with coordinates
+            const coordinatesObjectBallTwo = [
+                {
+                    x: ballTwoXtrajectory,
+                    y: ballTwoYtrajectory
+                },
+                {
+                    x: ballTwoXtrajectory,
+                    y: 0
+                }
+            ]
+            // Loop through array for ball1
+            setTimeout(function(){
+            for (let i = 0; i < coordinatesObjectBallTwo.length; i++) {
+                setTimeout(function timer() {
+                    let translate3dValue = "translate(" + coordinatesObjectBallTwo[i].x + "px," + coordinatesObjectBallTwo[i].y + "px)";
+                    console.log(translate3dValue);
+                    ballTwo.style.transform = translate3dValue;
+                }, i * 3000);
+            }
+            }, 500)
+
+// END OF THE SECOND BALL
+
+        });
+    });
+</script>
+</body>
+</html>
