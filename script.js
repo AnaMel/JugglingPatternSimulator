@@ -3,7 +3,7 @@ function resetInput() {
     $('input[type=text]').val('');
 }
 
-// Create global object responsible for containing visual effects
+// Create global object responsible for containing visual effects functionality
 const visualEffects = {};
 
 // Create local method
@@ -25,6 +25,9 @@ visualEffects.blurJBallOnInput = function () {
     });
 }
 
+
+// Create global object responsible for containing trajectories calculation functionality 
+const trajectories = {};
 
 // input value/height data set
 const odd = [
@@ -65,15 +68,17 @@ even = [
 ]
 
 
-// Actual JS
 
+// When document is ready...
 $(function(){
-// Call 
+    // Call a function to highlight selected ball
     visualEffects.highlightJBallOnInput();
+    // Call function to blur 
     visualEffects.blurJBallOnInput();
+    // When form is submitted...
     $('form').on('submit', function (event) {
+        //Prevent page from reload after form is submitted 
         event.preventDefault();
-        $('.ball').removeClass('jball-highlight');
         // Extract input values
         let ballOneYtrajectory = $('input[name=ball1]').val();
         let ballTwoYtrajectory = $('input[name=ball2').val();
@@ -129,6 +134,7 @@ $(function(){
         }
         else if (ballOneYtrajectory % 2 == 0) {
             ballOneXtrajectory = 0;
+            ballOneXInitiaPosition = 0;
             for (let i = 0; i < odd.length; i++) {
                 if (ballOneYtrajectory == even[i].number) {
                     ballOneYtrajectory = even[i].height;
@@ -189,6 +195,7 @@ $(function(){
         }
         else if (ballTwoYtrajectory % 2 == 0) {
             ballTwoXtrajectory = 0;
+            ballTwoXInitiaPosition = 0;
             for (let i = 0; i < odd.length; i++) {
                 if (ballTwoYtrajectory == even[i].number) {
                     ballTwoYtrajectory = even[i].height;
@@ -256,6 +263,7 @@ $(function(){
         }
         else if (ballThreeYtrajectory % 2 == 0) {
             ballThreeXtrajectory = 0;
+            ballThreeXInitiaPosition = 0;
             for (let i = 0; i < odd.length; i++) {
                 if (ballThreeYtrajectory == even[i].number) {
                     ballThreeYtrajectory = even[i].height;
