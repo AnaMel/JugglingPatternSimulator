@@ -84,6 +84,7 @@ trajectories.ballThreeXtrajectory = 0;
 trajectories.ballOne = document.querySelector(".ball1");
 trajectories.ballTwo = document.querySelector(".ball2");
 trajectories.ballThree = document.querySelector(".ball3");
+// Retirieve number of iterations
 
 // Based on provided site-swap value
 // Identify whether a juglling ball is expected to change its vertical
@@ -91,8 +92,9 @@ trajectories.ballThree = document.querySelector(".ball3");
 trajectories.calculateCoordinates = function() {
     // Retrieve inputted site-swap values
     ballOneYtrajectory = $('input[name=ball1]').val();
-    ballTwoYtrajectory = $('input[name=ball2').val();
-    ballThreeYtrajectory = $('input[name=ball3').val();
+    ballTwoYtrajectory = $('input[name=ball2]').val();
+    ballThreeYtrajectory = $('input[name=ball3]').val();
+    numIterations = $('input[name=numIteration]').val() - 1;
     // Calculate height and vertical 
     if (ballOneYtrajectory % 2 == 1) {
         if (trajectories.OffsetTest < trajectories.middleScreen) {
@@ -143,15 +145,20 @@ trajectories.calculateCoordinates = function() {
     ]
 
 // Loop through the coordinates array for ball one
-    for (let i = 0; i < coordinatesObject.length; i++) {
+    for (let j = 0; j <= numIterations; j++){
         setTimeout(function timer() {
-            console.time('BallOne timer');
-            let translate3dValue = "translate(" + coordinatesObject[i].x + "," + coordinatesObject[i].y + "px)";
-            console.log(`Ball One coordinatesare ${translate3dValue}`);
-            trajectories.ballOne.style.transform = translate3dValue;
-            console.timeEnd('BallOne timer');
-        }, i * 2000);
-    }
+            for (let i = 0; i < coordinatesObject.length; i++) {
+                setTimeout(function timer() {
+                    console.time('BallOne timer');
+                    let translate3dValue = "translate(" + coordinatesObject[i].x + "," + coordinatesObject[i].y + "px)";
+                    console.log(`Ball One coordinatesare ${translate3dValue}`);
+                    trajectories.ballOne.style.transform = translate3dValue;
+                    console.timeEnd('BallOne timer');
+                }, i * 2000);
+            }
+        }, j* 8000);
+    console.log(j);
+}
 
     // SECOND BALL
     if (ballTwoYtrajectory % 2 == 1) {
@@ -203,16 +210,20 @@ trajectories.calculateCoordinates = function() {
         }
     ]
 // Loop through the coordinates array for ball two
-    setTimeout(function timer() {
-        for (let i = 0; i < coordinatesObjectBallTwo.length; i++) {
-            setTimeout(function timer() {
-                console.time('BallTwo timer');
-                let translate3dValue = "translate(" + coordinatesObjectBallTwo[i].x + "," + coordinatesObjectBallTwo[i].y + "px)";
-                trajectories.ballTwo.style.transform = translate3dValue;
-                console.log(`Ball Two coordinatesare ${translate3dValue}`);
-                console.timeEnd('BallTwo timer');
-            }, i * 2000);
-        }
+setTimeout(function timer() {
+    for (let j = 0; j <= numIterations; j++) {
+        setTimeout(function timer() {
+                for (let i = 0; i < coordinatesObjectBallTwo.length; i++) {
+                    setTimeout(function timer() {
+                        console.time('BallTwo timer');
+                        let translate3dValue = "translate(" + coordinatesObjectBallTwo[i].x + "," + coordinatesObjectBallTwo[i].y + "px)";
+                        trajectories.ballTwo.style.transform = translate3dValue;
+                        console.log(`Ball Two coordinatesare ${translate3dValue}`);
+                        console.timeEnd('BallTwo timer');
+                    }, i * 2000);
+                }
+            }, j * 8000);
+        }  
     }, 500)
 
 // BALL THREE
@@ -267,15 +278,19 @@ trajectories.calculateCoordinates = function() {
     ]
 // Loop through array for ball three
     setTimeout(function timer() {
-        for (let i = 0; i < coordinatesObjectBallThree.length; i++) {
+        for (let j = 0; j <= numIterations; j++) {
             setTimeout(function timer() {
-                console.time('BallThree timer');
-                let translate3dValue = "translate(" + coordinatesObjectBallThree[i].x + "," + coordinatesObjectBallThree[i].y + "px)";
-                console.log(`Ball 3 coordinates are ${translate3dValue}`);
-                trajectories.ballThree.style.transform = translate3dValue;
-                console.log(`Ball Three coordinatesare ${translate3dValue}`);
-                console.timeEnd('BallThree timer');
-            }, i * 2000);
+                for (let i = 0; i < coordinatesObjectBallThree.length; i++) {
+                    setTimeout(function timer() {
+                        console.time('BallThree timer');
+                        let translate3dValue = "translate(" + coordinatesObjectBallThree[i].x + "," + coordinatesObjectBallThree[i].y + "px)";
+                        console.log(`Ball 3 coordinates are ${translate3dValue}`);
+                        trajectories.ballThree.style.transform = translate3dValue;
+                        console.log(`Ball Three coordinatesare ${translate3dValue}`);
+                        console.timeEnd('BallThree timer');
+                    }, i * 2000);
+                }
+            }, j * 8000);
         }
     }, 1000)
 }
