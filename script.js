@@ -44,11 +44,11 @@ trajectories.odd = [
 },
 {
     number: 5,
-    height: -500
+    height: -300
 },
 {
     number: 7,
-    height: -750
+    height: -350
 }]
 
 trajectories.even = [
@@ -62,11 +62,11 @@ trajectories.even = [
 },
 {
     number: 4,
-    height: -500
+    height: -300
 },
 {
     number: 6,
-    height: -750
+    height: -350
 }]
 
 
