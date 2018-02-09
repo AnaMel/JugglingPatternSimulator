@@ -28,7 +28,6 @@ visualEffects.blurJBallOnInput = function () {
     });
 }
 
-
 // Create global object responsible for containing trajectories calculation functionality 
 const trajectories = {};
 
@@ -84,81 +83,132 @@ trajectories.ballThreeXtrajectory = 0;
 trajectories.ballOne = document.querySelector(".ball1");
 trajectories.ballTwo = document.querySelector(".ball2");
 trajectories.ballThree = document.querySelector(".ball3");
-// Retirieve number of iterations
+// Retirieve the left/right value of each ball
+trajectories.smallGap = $('.ball1').css("left").replace(/[^-\d\.]/g, '') ;
+console.log(trajectories.smallGap);
+trajectories.largeGap = $('.ball3').css("left").replace(/[^-\d\.]/g, '');
+// console.log(trajectories.largeGap);
 
 // Based on provided site-swap value
 // Identify whether a juglling ball is expected to change its vertical
 // And identify height of each throw
 trajectories.calculateCoordinates = function() {
-    // Retrieve inputted site-swap values
+// Retrieve inputted site-swap values
     ballOneYtrajectory = $('input[name=ball1]').val();
     ballTwoYtrajectory = $('input[name=ball2]').val();
     ballThreeYtrajectory = $('input[name=ball3]').val();
     numIterations = $('input[name=numIteration]').val() - 1;
+// Create function
+    console.log(ballOneYtrajectory);
+// responsible for executing juggling cycle
+// by looping through array of coordinates
+// accepts array of coordinates and corresponding DOM element (j. ball)
+    let juggle = function (array, ballNumber) {
+        let ballName = $(ballNumber).data('ball');
+        console.log(array);
+        for (let j = 0; j <= numIterations; j++) {
+            setTimeout(function timer() {
+                for (let i = 0; i < array.length; i++) {
+                    setTimeout(function timer() {
+                        console.time(`${ballName} ball timer`);
+                        let translate3dValue = "translate(" + array[i].x + "," + array[i].y + "px)";
+                        console.log(`${ballName} coordinatesare ${translate3dValue}`);
+                        ballNumber.style.transform = translate3dValue;
+                        console.timeEnd(`${ballName} ball timer`);
+                    }, i * 2000);
+                }
+            }, j * 8000);
+        }
+    }
+
+    let calculateXY = function(inputY, gap, ballOffset, trajectoryX, initialXPosition) {
+        if (inputY % 2 == 1) {
+            if (ballOffset < trajectories.middleScreen) {
+                trajectoryX = ($('.container').width() - (Number(gap) + Number(trajectories.smallGap) + 50)) + "px";
+                // console.log(`TEST ${trajectoryX}`);
+                // console.log(trajectories.smallGap);
+                // console.log(gap + trajectories.smallGap + 50);
+                console.log($('.container').width());
+                initialXPosition = 0;
+            }
+            else if (offset >= middleScreen) {
+                initialXPosition = 0;
+            }
+            // Iterate through array of odd notation values
+            // and update Y trajectory with px values for the corresponding notation number
+            for (let i = 0; i < trajectories.odd.length; i++) {
+                if (inputY == trajectories.odd[i].number) {
+                    inputY = trajectories.odd[i].height;
+                }
+            }
+        }
+        else if (inputY % 2 == 0) {
+            trajectoryX = 0;
+            initialXPosition = 0;
+            for (let i = 0; i < trajectories.even.length; i++) {
+                if (inputY == trajectories.even[i].number) {
+                    inputY = trajectories.even[i].height;
+                }
+            }
+        }
+        else {
+            console.log("Such notation does not exist");
+        }
+        return [
+            {
+                x: trajectoryX,
+                y: inputY
+            },
+            {
+                x: trajectoryX,
+                y: 0
+            },
+            {
+                x: initialXPosition,
+                y: inputY
+            },
+            {
+                x: initialXPosition,
+                y: 0
+            }
+        ]
+    }
+
+    let coordinatesPositions = calculateXY(ballOneYtrajectory, trajectories.smallGap, trajectories.OffsetTest, trajectories.ballOneXtrajectory, trajectories.ballOneXInitiaPosition);
     // Calculate height and vertical 
-    if (ballOneYtrajectory % 2 == 1) {
-        if (trajectories.OffsetTest < trajectories.middleScreen) {
-            ballOneXtrajectory = $('.container').width() - 250 + "px";
-            ballOneXInitiaPosition = 0;
-        }
-        else if (trajectories.OffsetTest >= middleScreen) {
-            ballOneXInitiaPosition = 0;
-        }
+    // if (ballOneYtrajectory % 2 == 1) {
+    //     if (trajectories.OffsetTest < trajectories.middleScreen) {
+    //         // ballOneXtrajectory = $('.container').width() - 250 + "px";
+    //         ballOneXInitiaPosition = 0;
+    //     }
+    //     else if (trajectories.OffsetTest >= middleScreen) {
+    //         ballOneXInitiaPosition = 0;
+    //     }
         // Iterate through array of odd notation values
-        // and update Y trajectory with px values for the corresponding notation number
-        for (let i = 0; i < trajectories.odd.length; i++) {
-            if (ballOneYtrajectory == trajectories.odd[i].number) {
-                ballOneYtrajectory = trajectories.odd[i].height;
-            }
-        }
-    }
-    else if (ballOneYtrajectory % 2 == 0) {
-        ballOneXtrajectory = 0;
-        ballOneXInitiaPosition = 0;
-        for (let i = 0; i < trajectories.even.length; i++) {
-            if (ballOneYtrajectory == trajectories.even[i].number) {
-                ballOneYtrajectory = trajectories.even[i].height;
-            }
-        }
-    }
-    else {
-        console.log("Ball One: Such notation does not exist");
-    }
+    //     // and update Y trajectory with px values for the corresponding notation number
+    //     for (let i = 0; i < trajectories.odd.length; i++) {
+    //         if (ballOneYtrajectory == trajectories.odd[i].number) {
+    //             ballOneYtrajectory = trajectories.odd[i].height;
+    //         }
+    //     }
+    // }
+    // else if (ballOneYtrajectory % 2 == 0) {
+    //     ballOneXtrajectory = 0;
+    //     ballOneXInitiaPosition = 0;
+    //     for (let i = 0; i < trajectories.even.length; i++) {
+    //         if (ballOneYtrajectory == trajectories.even[i].number) {
+    //             ballOneYtrajectory = trajectories.even[i].height;
+    //         }
+    //     }
+    // }
+    // else {
+    //     console.log("Ball One: Such notation does not exist");
+    // }
 // Create array of objects to contain (x;y) coordinates
-    let coordinatesObject = [
-        {
-            x: ballOneXtrajectory,
-            y: ballOneYtrajectory
-        },
-        {
-            x: ballOneXtrajectory,
-            y: 0
-        },
-        {
-            x: ballOneXInitiaPosition,
-            y: ballOneYtrajectory
-        },
-        {
-            x: ballOneXInitiaPosition,
-            y: 0
-        }
-    ]
+
 
 // Loop through the coordinates array for ball one
-    for (let j = 0; j <= numIterations; j++){
-        setTimeout(function timer() {
-            for (let i = 0; i < coordinatesObject.length; i++) {
-                setTimeout(function timer() {
-                    console.time('BallOne timer');
-                    let translate3dValue = "translate(" + coordinatesObject[i].x + "," + coordinatesObject[i].y + "px)";
-                    console.log(`Ball One coordinatesare ${translate3dValue}`);
-                    trajectories.ballOne.style.transform = translate3dValue;
-                    console.timeEnd('BallOne timer');
-                }, i * 2000);
-            }
-        }, j* 8000);
-    console.log(j);
-}
+    juggle(coordinatesPositions, trajectories.ballOne);
 
     // SECOND BALL
     if (ballTwoYtrajectory % 2 == 1) {
@@ -210,21 +260,9 @@ trajectories.calculateCoordinates = function() {
         }
     ]
 // Loop through the coordinates array for ball two
-setTimeout(function timer() {
-    for (let j = 0; j <= numIterations; j++) {
-        setTimeout(function timer() {
-                for (let i = 0; i < coordinatesObjectBallTwo.length; i++) {
-                    setTimeout(function timer() {
-                        console.time('BallTwo timer');
-                        let translate3dValue = "translate(" + coordinatesObjectBallTwo[i].x + "," + coordinatesObjectBallTwo[i].y + "px)";
-                        trajectories.ballTwo.style.transform = translate3dValue;
-                        console.log(`Ball Two coordinatesare ${translate3dValue}`);
-                        console.timeEnd('BallTwo timer');
-                    }, i * 2000);
-                }
-            }, j * 8000);
-        }  
-    }, 500)
+    setTimeout(function timer() {
+        juggle(coordinatesObjectBallTwo, trajectories.ballTwo);
+    }, 500) 
 
 // BALL THREE
 // Calculate height and vertical 
@@ -278,21 +316,8 @@ setTimeout(function timer() {
     ]
 // Loop through array for ball three
     setTimeout(function timer() {
-        for (let j = 0; j <= numIterations; j++) {
-            setTimeout(function timer() {
-                for (let i = 0; i < coordinatesObjectBallThree.length; i++) {
-                    setTimeout(function timer() {
-                        console.time('BallThree timer');
-                        let translate3dValue = "translate(" + coordinatesObjectBallThree[i].x + "," + coordinatesObjectBallThree[i].y + "px)";
-                        console.log(`Ball 3 coordinates are ${translate3dValue}`);
-                        trajectories.ballThree.style.transform = translate3dValue;
-                        console.log(`Ball Three coordinatesare ${translate3dValue}`);
-                        console.timeEnd('BallThree timer');
-                    }, i * 2000);
-                }
-            }, j * 8000);
-        }
-    }, 1000)
+        juggle(coordinatesObjectBallThree, trajectories.ballThree);
+    }, 1000) 
 }
 
 // When document is ready...
