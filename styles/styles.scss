@@ -52,6 +52,9 @@ h1 span:nth-child(2) {
     width: 100%;
     border: 2px solid #80deea;
     position: relative;
+    @media (max-width: 480px) {
+        margin-bottom: 15px;
+    }
 }
 
 .ball {
@@ -67,18 +70,36 @@ h1 span:nth-child(2) {
     left: 100px;
     transition: all 2s;
     background-color: #00bfa5;
+    @media (max-width: 768px) {
+        left: 50px;
+    }
+    @media (max-width: 480px) {
+        left: 15px;
+    }
 }
 
 .ball2 {
     right: 100px;
     transition: all 2s;
-    background-color: darkcyan ;
+    background-color: darkcyan;
+    @media (max-width: 768px) {
+        right: 50px;
+    }
+    @media (max-width: 480px) {
+        right: 15px;
+    }
 }
 
 .ball3 {
     left: 175px;
     transition: all 2s;
     background-color: #ff8f00;
+    @media (max-width: 768px) {
+        left: 125px;
+    }
+    @media (max-width: 480px) {
+        left: 75px;
+    }
 }
 
 form {
@@ -87,6 +108,9 @@ form {
     width: 100%;
     justify-content: space-between;
     flex-wrap: wrap;
+    @media (max-width: 480px) {
+        justify-content: center;
+    }
 }
 
 .action {
@@ -104,9 +128,12 @@ form {
 }
 
 a {
-    margin-top: 15px;
+    margin: 10px 0 5px;
     text-decoration: none;
     color: #ff9800;
+    @media (max-width: 480px) {
+        display: none;
+    }
 }
 
 a:hover {
@@ -123,6 +150,13 @@ input {
     max-width: 250px;
     margin-bottom: 15px;
     flex-basis: 15%;
+    @media (max-width: 768px) {
+        flex-basis: 35%;
+    }
+    @media (max-width: 480px) {
+        flex-basis: 100%;
+        max-width: 275px;
+    }
 }
 
 .jball-highlight {

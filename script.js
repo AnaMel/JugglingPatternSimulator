@@ -130,7 +130,7 @@ trajectories.calculateCoordinates = function() {
             }
             else if (ballOffset >= trajectories.middleScreen) {
                 initialXPosition = 0;
-                trajectoryX = -1 * ($('.container').width() - 250) + "px";
+                trajectoryX = -1 * ($('.container').width() - (Number(trajectories.smallGap) * 2 + 50)) + "px";
             }
             // Iterate through array of odd notation values
             // and update Y trajectory with px values for the corresponding notation number
