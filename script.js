@@ -4,7 +4,15 @@ function resetInput() {
 }
 
 function init() {
+    $('.dynamicElement').remove();
+    ballOneYtrajectory = $('input[name=ball1]').val();
+    ballTwoYtrajectory = $('input[name=ball2]').val();
+    ballThreeYtrajectory = $('input[name=ball3]').val();
+    numIterations = $('input[name=numIteration]').val() - 1;
 
+    let contentToPrepend = (`<p class="dynamicElement">${ballOneYtrajectory}${ballTwoYtrajectory}${ballThreeYtrajectory}</p>`);
+    $('contentToPrepend').addClass('dynamicElement');
+    $('.container').prepend(`${contentToPrepend}`);
 }
 // Create global object responsible for containing visual effects functionality
 const visualEffects = {};
@@ -98,6 +106,13 @@ trajectories.calculateCoordinates = function() {
     ballTwoYtrajectory = $('input[name=ball2]').val();
     ballThreeYtrajectory = $('input[name=ball3]').val();
     numIterations = $('input[name=numIteration]').val() - 1;
+
+    // let contentToPrepend = (`<p class="dynamicElement">${ballOneYtrajectory}${ballTwoYtrajectory}${ballThreeYtrajectory}</p>`);
+    // $('contentToPrepend').addClass('dynamicElement');
+    // $('.container').prepend(`${contentToPrepend}`);
+    // $('contentToPrepend').addClass('dynamicElement');
+    // console.log(`Here you go ... ${contentToPrepend}`);
+    // $('.container').prepend(`${ballOneYtrajectory}${ballTwoYtrajectory}${ballThreeYtrajectory}`);
 // Create function
 // responsible for executing juggling cycle
 // by looping through array of coordinates
@@ -197,12 +212,14 @@ trajectories.calculateCoordinates = function() {
 
 // When document is ready...
 $(function(){
+    // init();
     // Call a function to highlight selected ball
     visualEffects.highlightJBallOnInput();
     // Call function to blur 
     visualEffects.blurJBallOnInput();
     // When form is submitted...
     $('form').on('submit', function (event) {
+        init();
         //Prevent page from reload after form is submitted 
         event.preventDefault();
         // Clear input fields

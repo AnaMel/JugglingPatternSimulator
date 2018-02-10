@@ -162,3 +162,28 @@ input {
 .jball-highlight {
     box-shadow:  0 0 50px #c51162;
 }
+
+.dynamicElement {
+    text-align: center;
+    font-size: 10rem;
+    font-family: 'Abril Fatface', cursive;
+    color: #ff8f00;
+    letter-spacing: 2px;
+    animation: animateElement linear 5s;
+    animation-iteration-count: 100;
+}
+
+@keyframes animateElement{
+  0% {
+    color: darkcyan;
+    opacity: 0.5;
+  }
+  50% {
+    color: #ff8f00;
+    opacity: 0.75;
+  }
+  100% {
+    color: #00bfa5;
+    opacity: 1;
+  }
+}
