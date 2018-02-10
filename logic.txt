@@ -48,3 +48,14 @@ const coordinates = {
         }
     ]
 }
+
+- Add css effect for the button
+- Add form valdiation
+- Break code into functions
+- Responsive (how to implement)
+
+- more contrast in the title colour, darker (dark blue)
+- more space between title and box
+- darker title / footer
+- try making ball colours same as gradient corners, but a bit darker
+- move form up

@@ -99,7 +99,6 @@ trajectories.calculateCoordinates = function() {
     ballThreeYtrajectory = $('input[name=ball3]').val();
     numIterations = $('input[name=numIteration]').val() - 1;
 // Create function
-    console.log(ballOneYtrajectory);
 // responsible for executing juggling cycle
 // by looping through array of coordinates
 // accepts array of coordinates and corresponding DOM element (j. ball)
@@ -120,19 +119,18 @@ trajectories.calculateCoordinates = function() {
             }, j * 8000);
         }
     }
-
+// Create function
+// responsible for calculating X;Y coordinates for each juggling ball
     let calculateXY = function(inputY, gap, ballOffset, trajectoryX, initialXPosition) {
         if (inputY % 2 == 1) {
             if (ballOffset < trajectories.middleScreen) {
                 trajectoryX = ($('.container').width() - (Number(gap) + Number(trajectories.smallGap) + 50)) + "px";
-                // console.log(`TEST ${trajectoryX}`);
-                // console.log(trajectories.smallGap);
-                // console.log(gap + trajectories.smallGap + 50);
                 console.log($('.container').width());
                 initialXPosition = 0;
             }
-            else if (offset >= middleScreen) {
+            else if (ballOffset >= trajectories.middleScreen) {
                 initialXPosition = 0;
+                trajectoryX = -1 * ($('.container').width() - 250) + "px";
             }
             // Iterate through array of odd notation values
             // and update Y trajectory with px values for the corresponding notation number
@@ -174,146 +172,23 @@ trajectories.calculateCoordinates = function() {
         ]
     }
 
+// FIRST BALL
+// Calculate height and vertical 
     let coordinatesPositions = calculateXY(ballOneYtrajectory, trajectories.smallGap, trajectories.OffsetTest, trajectories.ballOneXtrajectory, trajectories.ballOneXInitiaPosition);
-    // Calculate height and vertical 
-    // if (ballOneYtrajectory % 2 == 1) {
-    //     if (trajectories.OffsetTest < trajectories.middleScreen) {
-    //         // ballOneXtrajectory = $('.container').width() - 250 + "px";
-    //         ballOneXInitiaPosition = 0;
-    //     }
-    //     else if (trajectories.OffsetTest >= middleScreen) {
-    //         ballOneXInitiaPosition = 0;
-    //     }
-        // Iterate through array of odd notation values
-    //     // and update Y trajectory with px values for the corresponding notation number
-    //     for (let i = 0; i < trajectories.odd.length; i++) {
-    //         if (ballOneYtrajectory == trajectories.odd[i].number) {
-    //             ballOneYtrajectory = trajectories.odd[i].height;
-    //         }
-    //     }
-    // }
-    // else if (ballOneYtrajectory % 2 == 0) {
-    //     ballOneXtrajectory = 0;
-    //     ballOneXInitiaPosition = 0;
-    //     for (let i = 0; i < trajectories.even.length; i++) {
-    //         if (ballOneYtrajectory == trajectories.even[i].number) {
-    //             ballOneYtrajectory = trajectories.even[i].height;
-    //         }
-    //     }
-    // }
-    // else {
-    //     console.log("Ball One: Such notation does not exist");
-    // }
-// Create array of objects to contain (x;y) coordinates
-
-
 // Loop through the coordinates array for ball one
     juggle(coordinatesPositions, trajectories.ballOne);
 
-    // SECOND BALL
-    if (ballTwoYtrajectory % 2 == 1) {
-        if (trajectories.OffsetBallTwo < trajectories.middleScreen) {
-            ballTwoXInitiaPosition = 0;
-        }
-        else if (trajectories.OffsetBallTwo >= trajectories.middleScreen) {
-            ballTwoXtrajectory = -1 * ($('.container').width() - 250) + "px";
-            ballTwoXInitiaPosition = 0;
-        }
-        // Iterate through array of odd notation values
-        // and update Ytrajectory with px values for the corresponding notation number
-        for (let i = 0; i < trajectories.odd.length; i++) {
-            if (ballTwoYtrajectory == trajectories.odd[i].number) {
-                ballTwoYtrajectory = trajectories.odd[i].height;
-            }
-        }
-    }
-    else if (ballTwoYtrajectory % 2 == 0) {
-        ballTwoXtrajectory = 0;
-        ballTwoXInitiaPosition = 0;
-        for (let i = 0; i < trajectories.even.length; i++) {
-            if (ballTwoYtrajectory == trajectories.even[i].number) {
-                ballTwoYtrajectory = trajectories.even[i].height;
-            }
-        }
-    }
-    else {
-        console.log("Such notation does not exist");
-    }
-
-// Create array of objects to contain (x;y) coordinates
-    const coordinatesObjectBallTwo = [
-        {
-            x: ballTwoXtrajectory,
-            y: ballTwoYtrajectory
-        },
-        {
-            x: ballTwoXtrajectory,
-            y: 0
-        },
-        {
-            x: ballTwoXInitiaPosition,
-            y: ballTwoYtrajectory
-        },
-        {
-            x: ballTwoXInitiaPosition,
-            y: 0
-        }
-    ]
+// SECOND BALL
+// Calculate height and vertical 
+    let coordinatesObjectBallTwo = calculateXY(ballTwoYtrajectory, trajectories.smallGap, trajectories.OffsetBallTwo, trajectories.ballTwoXtrajectory, trajectories.ballTwoXInitiaPosition);
 // Loop through the coordinates array for ball two
     setTimeout(function timer() {
         juggle(coordinatesObjectBallTwo, trajectories.ballTwo);
     }, 500) 
 
-// BALL THREE
+// THIRD BALL
 // Calculate height and vertical 
-    if (ballThreeYtrajectory % 2 == 1) {
-        if (trajectories.OffsetBallThree < trajectories.middleScreen) {
-            ballThreeXtrajectory = $('.container').width() - 325 + "px";
-            ballThreeXInitiaPosition = 0;
-        }
-        else if (trajectories.OffsetBallThree >= trajectories.middleScreen) {
-            ballThreeXInitiaPosition = 0;
-        }
-        // Iterate through array of odd notation values
-        // and update Ytrajectory with px values for the corresponding notation number
-        for (let i = 0; i < trajectories.odd.length; i++) {
-            if (ballThreeYtrajectory == trajectories.odd[i].number) {
-                ballThreeYtrajectory = trajectories.odd[i].height;
-            }
-        }
-    }
-    else if (ballThreeYtrajectory % 2 == 0) {
-        ballThreeXtrajectory = 0;
-        ballThreeXInitiaPosition = 0;
-        for (let i = 0; i < odd.length; i++) {
-            if (ballThreeYtrajectory == trajectories.even[i].number) {
-                ballThreeYtrajectory = trajectories.even[i].height;
-            }
-        }
-    }
-    else {
-        console.log("Such notation does not exist");
-    }
-
-// Create array of objects to contain (x;y) coordinates
-    const coordinatesObjectBallThree = [
-        {
-            x: ballThreeXtrajectory,
-            y: ballThreeYtrajectory
-        },
-        {
-            x: ballThreeXtrajectory,
-            y: 0
-        },
-        {
-            x: ballThreeXInitiaPosition,
-            y: ballThreeYtrajectory
-        },
-        {
-            x: ballThreeXInitiaPosition,
-            y: 0
-        }
-    ]
+    let coordinatesObjectBallThree = calculateXY(ballThreeYtrajectory, trajectories.largeGap, trajectories.OffsetBallThree, trajectories.ballThreeXtrajectory, trajectories.ballThreeXInitiaPosition);
 // Loop through array for ball three
     setTimeout(function timer() {
         juggle(coordinatesObjectBallThree, trajectories.ballThree);
