@@ -3,7 +3,7 @@ function resetInput() {
     $('input[type=text]').val('');
 }
 
-function init() {
+function animate() {
     $('.dynamicElement').remove();
     ballOneYtrajectory = $('input[name=ball1]').val();
     ballTwoYtrajectory = $('input[name=ball2]').val();
@@ -34,6 +34,15 @@ visualEffects.blurJBallOnInput = function () {
         // console.log(ball);
         $(`.ball[data-ball=${ball}]`).removeClass('jball-highlight');
     });
+}
+
+// Validate inputed values
+// 1. All fields are mandatory && 2. All values are numbers
+const inputValidation = {};
+inputValidation.validateInputValues = function() {
+    if ($('input[name=ball1]').val().length == 0) {
+        alert("blabla");
+    }
 }
 
 // Create global object responsible for containing trajectories calculation functionality 
@@ -128,6 +137,8 @@ trajectories.calculateCoordinates = function() {
                         let translate3dValue = "translate(" + array[i].x + "," + array[i].y + "px)";
                         console.log(`${ballName} coordinatesare ${translate3dValue}`);
                         ballNumber.style.transform = translate3dValue;
+                        // Support for Mozzilla
+                        ballNumber.style.MozTransform = translate3dValue;
                         console.timeEnd(`${ballName} ball timer`);
                     }, i * 2000);
                 }
@@ -219,7 +230,8 @@ $(function(){
     visualEffects.blurJBallOnInput();
     // When form is submitted...
     $('form').on('submit', function (event) {
-        init();
+        inputValidation.validateInputValues();
+        animate();
         //Prevent page from reload after form is submitted 
         event.preventDefault();
         // Clear input fields

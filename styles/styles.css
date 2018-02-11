@@ -139,10 +139,13 @@ body {
   font-size: 1.6rem;
   font-family: 'Open Sans', sans-serif;
   margin: 0;
-  padding: 0; }
+  padding: 0;
+  height: 100vh; }
+  @media (max-width: 1000px) {
+    body {
+      height: 100%; } }
 
 main {
-  /* background-image: linear-gradient(to top, #fbc2eb 0%, #a6c1ee 100%);; */
   background-image: -webkit-gradient(linear, left bottom, left top, from(#fddb92), to(#d1fdff));
   background-image: -webkit-linear-gradient(bottom, #fddb92 0%, #d1fdff 100%);
   background-image: -o-linear-gradient(bottom, #fddb92 0%, #d1fdff 100%);
