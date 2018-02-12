@@ -72,7 +72,8 @@ h1 span:nth-child(2) {
 
 .ball1 {
     left: 100px;
-    transition: all 2s;
+    transition: all 1.5s;
+    // -moz-transition:all 2s ease;
     background-color: #00bfa5;
     @media (max-width: 768px) {
         left: 50px;
@@ -84,7 +85,9 @@ h1 span:nth-child(2) {
 
 .ball2 {
     right: 100px;
-    transition: all 2s;
+    // left: 1060.09px;
+    transition: all 1.5s;
+    // -moz-transition:all 2s ease;
     background-color: darkcyan;
     @media (max-width: 768px) {
         right: 50px;
@@ -96,7 +99,8 @@ h1 span:nth-child(2) {
 
 .ball3 {
     left: 175px;
-    transition: all 2s;
+    transition: all 1.5s;
+    // -moz-transition: all 1s;
     background-color: #ff8f00;
     @media (max-width: 768px) {
         left: 125px;
@@ -180,14 +184,14 @@ input {
 @keyframes animateElement{
   0% {
     color: darkcyan;
-    opacity: 0.5;
+    opacity: 0;
   }
   50% {
     color: #ff8f00;
-    opacity: 0.75;
+    opacity: 0.5;
   }
   100% {
     color: #00bfa5;
-    opacity: 1;
+    opacity: 0.75;
   }
 }

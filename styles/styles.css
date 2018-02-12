@@ -200,9 +200,9 @@ h1 span:nth-child(2) {
 
 .ball1 {
   left: 100px;
-  -webkit-transition: all 2s;
-  -o-transition: all 2s;
-  transition: all 2s;
+  -webkit-transition: all 1.5s;
+  -o-transition: all 1.5s;
+  transition: all 1.5s;
   background-color: #00bfa5; }
   @media (max-width: 768px) {
     .ball1 {
@@ -213,9 +213,9 @@ h1 span:nth-child(2) {
 
 .ball2 {
   right: 100px;
-  -webkit-transition: all 2s;
-  -o-transition: all 2s;
-  transition: all 2s;
+  -webkit-transition: all 1.5s;
+  -o-transition: all 1.5s;
+  transition: all 1.5s;
   background-color: darkcyan; }
   @media (max-width: 768px) {
     .ball2 {
@@ -226,9 +226,9 @@ h1 span:nth-child(2) {
 
 .ball3 {
   left: 175px;
-  -webkit-transition: all 2s;
-  -o-transition: all 2s;
-  transition: all 2s;
+  -webkit-transition: all 1.5s;
+  -o-transition: all 1.5s;
+  transition: all 1.5s;
   background-color: #ff8f00; }
   @media (max-width: 768px) {
     .ball3 {
@@ -320,21 +320,21 @@ input {
 @-webkit-keyframes animateElement {
   0% {
     color: darkcyan;
-    opacity: 0.5; }
+    opacity: 0; }
   50% {
     color: #ff8f00;
-    opacity: 0.75; }
+    opacity: 0.5; }
   100% {
     color: #00bfa5;
-    opacity: 1; } }
+    opacity: 0.75; } }
 
 @keyframes animateElement {
   0% {
     color: darkcyan;
-    opacity: 0.5; }
+    opacity: 0; }
   50% {
     color: #ff8f00;
-    opacity: 0.75; }
+    opacity: 0.5; }
   100% {
     color: #00bfa5;
-    opacity: 1; } }
+    opacity: 0.75; } }

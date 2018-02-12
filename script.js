@@ -56,15 +56,15 @@ trajectories.odd = [
 },
 {
     number: 3,
-    height: -250
+    height: 250
 },
 {
     number: 5,
-    height: -300
+    height: 300
 },
 {
     number: 7,
-    height: -350
+    height: 350
 }]
 
 trajectories.even = [
@@ -74,15 +74,15 @@ trajectories.even = [
 },
 {
     number: 2,
-    height: -250
+    height: 250
 },
 {
     number: 4,
-    height: -300
+    height: 300
 },
 {
     number: 6,
-    height: -350
+    height: 350
 }]
 
 
@@ -133,16 +133,21 @@ trajectories.calculateCoordinates = function() {
             setTimeout(function timer() {
                 for (let i = 0; i < array.length; i++) {
                     setTimeout(function timer() {
-                        console.time(`${ballName} ball timer`);
-                        let translate3dValue = "translate(" + array[i].x + "," + array[i].y + "px)";
-                        console.log(`${ballName} coordinatesare ${translate3dValue}`);
-                        ballNumber.style.transform = translate3dValue;
-                        // Support for Mozzilla
-                        ballNumber.style.MozTransform = translate3dValue;
-                        console.timeEnd(`${ballName} ball timer`);
-                    }, i * 2000);
+                        // console.time(`${ballName} ball timer`);
+                        let XCoordinate = array[i].x;
+                        let YCoordinate = array[i].y + "px";
+                        console.log(`${ballName} coordinatesare ${XCoordinate} and ${YCoordinate}`);
+                        
+                        // More elegant solution which is not working in Firefox
+                        // let translate3dValue = "translate(" + array[i].x + "," + array[i].y + "px)";
+                        // ballNumber.style.transform = translate3dValue;
+
+                        ballNumber.style.left = XCoordinate;
+                        ballNumber.style.bottom = YCoordinate;
+                        // console.timeEnd(`${ballName} ball timer`);
+                    }, i * 1500);
                 }
-            }, j * 8000);
+            }, j * 6000);
         }
     }
 // Create function
@@ -150,13 +155,13 @@ trajectories.calculateCoordinates = function() {
     let calculateXY = function(inputY, gap, ballOffset, trajectoryX, initialXPosition) {
         if (inputY % 2 == 1) {
             if (ballOffset < trajectories.middleScreen) {
-                trajectoryX = ($('.container').width() - (Number(gap) + Number(trajectories.smallGap) + 50)) + "px";
+                trajectoryX = ($('.container').width() - (Number(trajectories.smallGap) + 50)) + "px";
                 console.log($('.container').width());
-                initialXPosition = 0;
+                initialXPosition = gap + "px";
             }
             else if (ballOffset >= trajectories.middleScreen) {
-                initialXPosition = 0;
-                trajectoryX = -1 * ($('.container').width() - (Number(trajectories.smallGap) * 2 + 50)) + "px";
+                initialXPosition = ($('.container').width() - gap - 50) + "px";
+                trajectoryX = gap + "px";
             }
             // Iterate through array of odd notation values
             // and update Y trajectory with px values for the corresponding notation number
@@ -167,8 +172,14 @@ trajectories.calculateCoordinates = function() {
             }
         }
         else if (inputY % 2 == 0) {
-            trajectoryX = 0;
-            initialXPosition = 0;
+            if (ballOffset < trajectories.middleScreen) {
+                trajectoryX = gap + "px";
+                initialXPosition = gap + "px";
+            }
+            else if (ballOffset >= trajectories.middleScreen) {
+                initialXPosition = ($('.container').width() - gap - 50) + "px";
+                trajectoryX = ($('.container').width() - gap - 50) + "px";
+            }
             for (let i = 0; i < trajectories.even.length; i++) {
                 if (inputY == trajectories.even[i].number) {
                     inputY = trajectories.even[i].height;
@@ -179,6 +190,10 @@ trajectories.calculateCoordinates = function() {
             console.log("Such notation does not exist");
         }
         return [
+            {
+                x: initialXPosition,
+                y: 0
+            },
             {
                 x: trajectoryX,
                 y: inputY
