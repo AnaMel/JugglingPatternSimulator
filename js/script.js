@@ -37,11 +37,11 @@ visualEffects.blurJBallOnInput = function () {
 }
 
 // Validate inputed values
-// 1. All fields are mandatory && 2. All values are numbers
+// 1. All fields are mandatory
 const inputValidation = {};
 inputValidation.validateInputValues = function() {
     if ($('input[name=ball1]').val().length == 0) {
-        alert("blabla");
+        alert("Please enter site-swap notation");
     }
 }
 
